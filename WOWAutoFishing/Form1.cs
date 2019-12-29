@@ -28,7 +28,7 @@ namespace WOWAutoFishing
         private int screenHeight { get; set; }
 
         //wow进程的名字
-        private string wowName = "Wow";
+        private string wowName = "WowClassic";
 
         public Form1()
         {
