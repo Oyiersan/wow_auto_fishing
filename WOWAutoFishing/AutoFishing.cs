@@ -59,12 +59,12 @@ namespace WOWAutoFishing
 
         #region 全局参数
         //string log_path = @"C:\Users\DELL\Documents\Visual Studio 2008\Projects\Happy_Fishing\Logs.txt"; 
-        private Bitmap baseCursorImage = (Bitmap)Image.FromFile(@".\base_cursor.png");
+        private Bitmap baseCursorImage = (Bitmap)Image.FromFile(@".\base_cursor.png"); // base_cursor.png
         //Bitmap base_giant_float_buff_image = (Bitmap)Image.FromFile(@".\giant_float_buff.jpg");
         #endregion
 
         //屏幕上方预留出的高度
-        private int reservedHeight = 200;
+        private int reservedHeight = 100;
 
         public int ScreenWidth { get; set; }
 
@@ -112,7 +112,7 @@ namespace WOWAutoFishing
                 if (!IsFishingCursor())
                 {
                     //每次寻找3次鱼漂
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         cursorPosition = GetFishingCursorPosition();
 
@@ -132,11 +132,12 @@ namespace WOWAutoFishing
                 int waterListenAllTime = 0;   //监听水花总时长
                 int waterListenSleep = 10;  //监听水花每次Sleep时长
                 int waterListenMax = 20000; //监听水花最大时长 25秒
-                int imgWidth = 100;
-                int imgHeight = 100;
+                int imgWidth = 250;
+                int imgHeight = 180;
+
 
                 while (waterListenAllTime <= waterListenMax)
-                {
+                    {
                     //创建图像，用于保存截图
                     Image img = new Bitmap(imgWidth, imgHeight);
                     Graphics imgGraphics = Graphics.FromImage(img);
@@ -149,8 +150,10 @@ namespace WOWAutoFishing
                         new Size(imgWidth, imgHeight)
                         );
 
+
                     //判断是否有水花
                     Bitmap bitmap = (Bitmap)img;
+//                    bitmap.Save(@".\121.png");
 
                     bool isFind = false;
                     int findTimes = 0;
@@ -171,6 +174,7 @@ namespace WOWAutoFishing
 
                                 if (findTimes >= findTimesMax)
                                 {
+//                                    bitmap.Save(@".\121.png");
                                     isFind = true;
                                     break;
                                 }
@@ -253,9 +257,9 @@ namespace WOWAutoFishing
             Point cursorPosition = new Point(0, 0); //初始化找到的鱼漂的位置
             bool isFind = false;
 
-            int xStartPosition = ScreenWidth / 2 / 2 / 2;   //定义横向开始的位置
+            int xStartPosition = ScreenWidth / 2 / 2 ;   //定义横向开始的位置
             int xStopPosition = ScreenWidth - xStartPosition;//定义横向结束的位置
-            int yStopPosition = Int32.Parse(Math.Round(ScreenHeight / 1.5, 0).ToString());           //定义纵向结束的位置
+            int yStopPosition = Int32.Parse(Math.Round(ScreenHeight / 2.5, 0).ToString());           //定义纵向结束的位置
 
             for (int y = reservedHeight; y <= yStopPosition; y += yStepLength)
             {
